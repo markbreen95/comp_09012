@@ -16,3 +16,5 @@ Windows:
 Mac/Linux:
 
 ```source env/bin/activate```
+
+This environment should contain any necessary packages for data ETL and fitting machine learning models. It also has Jupyter Notebook installed which is handy for data exploration.
