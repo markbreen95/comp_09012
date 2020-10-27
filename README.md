@@ -17,7 +17,7 @@ Mac/Linux:
 
 ```source env/bin/activate```
 
-Install packages from the ````requirements.txt``` file:
+Install packages from the ```requirements.txt``` file:
 
 ```python -m pip install -r requirements.txt```
 
