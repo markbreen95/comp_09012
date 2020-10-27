@@ -17,4 +17,8 @@ Mac/Linux:
 
 ```source env/bin/activate```
 
+Install packages from the ````requirements.txt``` file:
+
+```python -m pip install -r requirements.txt```
+
 This environment should contain any necessary packages for data ETL and fitting machine learning models. It also has Jupyter Notebook installed which is handy for data exploration.
