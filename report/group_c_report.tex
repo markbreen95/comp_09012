@@ -115,6 +115,26 @@ Due to large variations in the value and units of measurement across the numeric
 	X_{j \text{ scaled}} = \frac{X_{j}-\text{min}(X_{j})}{\text{max}(X_{j})-\text{min}(X_{j})}
 \end{equation}
 
+\subsection{Model Metrics}
+
+The $F_{1}$ score was used to assess the accuracy of the model. The $F_{1}$ score is defined as the harmonic mean of the precision and recall. Precision is defined as:
+
+\begin{equation}
+	\text{Precision} = \frac{ \text{Number of true positives} }{\text{Number of true positives} + \text{Number of false positives}}
+\end{equation}
+
+Recall is defined as:
+
+\begin{equation}
+	\text{Precision} = \frac{ \text{Number of true positives} }{\text{Number of true positives} + \text{Number of false negatives}}
+\end{equation}
+
+Then, the $F_{1}$ score is defined as:
+
+\begin{equation}
+	F_{1} = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
+\end{equation}
+
 \section*{Acknowledgments}
 
 The Acknowledgments section, if included,
