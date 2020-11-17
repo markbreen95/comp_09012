@@ -25,6 +25,8 @@
 \usepackage{wrapfig}
 \usepackage{xspace}
 
+\usepackage{booktabs}
+
 \usepackage[T1]{fontenc}
 \usepackage{times}
 
@@ -54,7 +56,7 @@ Report for the COMP09012 group project
 %%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-Introduction section
+The goal of this paper is to predict the value of multiple classes relating to the road surface, traffic congestion and driving style of a vehicle.
 
 
 %%
@@ -64,12 +66,54 @@ This section will highlight the methods used for data cleaning and preparation, 
 
 \subsection{Data}
 
-Data was received in the form of four text file of comma separated value (CSV) extension. The delimiter encoded in the four CSV files is a semi-colon (;). The data contains information recorded for two trips in two vehicles, the vehicles being an Opel Corsa 1.3 HDi (95 CV) and Peugeot 207 1.4 HDi (70 CV). Since there is two recorded trips per vehicle, this means there is a total of four CSV data files.
+Data was received in the form of four text file of comma separated value (CSV) extension. The delimiter encoded in the four CSV files is a semi-colon (;). The data contains information recorded for two trips in two vehicles, the vehicles being an Opel Corsa 1.3 HDi (95 CV) and Peugeot 207 1.4 HDi (70 CV). Since there is two recorded trips per vehicle, this means there is a total of four CSV data files. The data was recorded from the vehicle on-board diagnostics (OBD) and micro-devices embedded in the smartphone of the driver operating the vehicle at the time.
 
-The data was recorded
+A breakdown of the number of rows in each vehicle dataset can be found in Table \ref{tab:file_rows}
 
+\begin{table}[!ht]
+	\caption{Number of rows in each of the raw data files}\label{tab:file_rows}
+	\centering
+	\begin{tabular}{lccccc}\toprule
+		Filename & Vehicle & Number of rows & Number of columns \\ 
+		opel\_corsa\_01.csv & Opel Corsa 1.3 HDi (95 CV) & 7392 & 17 \\ 
+		opel\_corsa\_02.csv & Opel Corsa 1.3 HDi (95 CV) & 4328 & 17 \\ 
+		peugeot\_207\_01.csv & Peugeot 207 1.4 HDi (70 CV) & 8614 & 17 \\ 
+		peugeot\_207\_02.csv & Peugeot 207 1.4 HDi (70 CV) & 4623 & 17 \\ \bottomrule
+	\end{tabular}
+\end{table}
 
+A description of the seventeen different columns available in the dataset is shown in Table \ref{tab:column_types}
 
+\begin{table}[!ht]
+	\caption{Data column descriptions}\label{tab:column_types}
+	\centering
+	\begin{tabular}{lccccc}\toprule
+		Column Name & Column Description & Data Type \\ 
+		AltitudeVariation & The altitude change calculated over 10 seconds & Decimal \\ 
+		VehicleSpeedInstantaneous & The current speed of the vehicle & Decimal \\ 
+		VehicleSpeedAverage & Vehicle average speed in the last 60 seconds & Decimal \\ 
+		VehicleSpeedVariance & Speed variance in the last 60 seconds & Decimal \\ 
+		VehicleSpeedVariation & Speed variation for every second of detection & Decimal \\ 
+		LongitudinalAcceleration & Longitudinal acceleration & Decimal \\ 
+		EngineLoad & Engine load as a percentage & Decimal \\ 
+		EngineCoolantTemperature & The engine coolant temperature in degrees celsius & Decimal \\ 
+		ManifoldAbsolutePressure & Manifold air pressure & Decimal \\ 
+		EngineRPM & Revolutions Per Minute (RPM) of the engine & Decimal \\ 
+		MassAirFlow & Mass Air Flow measured in grams per second & Decimal \\ 
+		IntakeAirTemperature & Intake air temperature at the engine entrance & Decimal \\ 
+		VerticalAcceleration & Vertical acceleration & Decimal \\ 
+		FuelConsumptionAverage & Average fuel consumption in litres per 100 km & Decimal \\ 
+		roadSurface & Road surface condition & String \\ 
+		traffic & Traffic congestion condition & String \\ 
+		drivingStyle & Driving style & String \\ \bottomrule
+	\end{tabular}
+\end{table}
+
+Due to large variations in the value and units of measurement across the numerical columns it was decided to scale the numerical columns to be within the range $(0,1)$. To do this equation was applied column-wise for each column $j$ in the numerical subset of the data columns:
+
+\begin{equation}
+	X_{j \text{ scaled}} = \frac{X_{j}-\text{min}(X_{j})}{\text{max}(X_{j})-\text{min}(X_{j})}
+\end{equation}
 
 \section*{Acknowledgments}
 
@@ -77,20 +121,6 @@ The Acknowledgments section, if included,
 		       follows the main body of the text and is headed
 		       ``Acknowledgments,'' printed in the same style
 		       as a section heading, but without a number.
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-\appendix
-
-\section{My first appendix }
-
-Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
-
-
-\section{My second appendix }
-
-
-Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
-
 
 \bibliographystyle{apalike}
 
