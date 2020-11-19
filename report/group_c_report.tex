@@ -109,6 +109,31 @@ A description of the seventeen different columns available in the dataset is sho
 	\end{tabular}
 \end{table}
 
+\begin{table}[!ht]
+	\caption{Percentage values missing in each column as a proportion of the number of rows of each dataset}\label{tab:column_types}
+	\centering
+	\begin{tabular}{lccccc}\toprule
+		Column Name & opel\_corsa\_01.csv & opel\_corsa\_2.csv & peugeot\_207\_1.csv & peugeot\_207\_2.csv \\ 
+		AltitudeVariation & 0.73 & 0.83 \\ 
+		VehicleSpeedInstantaneous & 0.09 & 0.18 \\ 
+		VehicleSpeedAverage & 4.8 & 5.45 \\ 
+		VehicleSpeedVariance & 4.8 & 5.45 \\ 
+		VehicleSpeedVariation & 0.46 & 0.88 \\ 
+		LongitudinalAcceleration & 0 & 0 \\ 
+		EngineLoad & 0 & 0 \\ 
+		EngineCoolantTemperature & 0 & 0 \\ 
+		ManifoldAbsolutePressure & 0 & 0 \\ 
+		EngineRPM & 0 & 0 \\ 
+		MassAirFlow & 0 & 0 \\ 
+		IntakeAirTemperature & 0 & 0 \\ 
+		VerticalAcceleration & 0 & 0 \\ 
+		FuelConsumptionAverage & 1.31 & 1.2 \\ 
+		roadSurface & 0 & 0 \\ 
+		traffic & 0 & 0 \\ 
+		drivingStyle & 0 & 0 \\ \bottomrule
+	\end{tabular}
+\end{table}
+
 Due to large variations in the value and units of measurement across the numerical columns it was decided to scale the numerical columns to be within the range $(0,1)$. To do this equation was applied column-wise for each column $j$ in the numerical subset of the data columns:
 
 \begin{equation}
