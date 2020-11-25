@@ -47,7 +47,7 @@
 
 
 \begin{abstract}
-Report for the COMP09012 group project
+There are hundreds of inputs which are important to consider when making decisions in autonomous vehicles. The ability to quantify these factors is of the upmost importance since quantitative data is ultimately what will need to be fed into any decision making algorithm. Three of these factors will be considered in this paper. Three such factors: driving style, road surface condition and traffic are investigated in this paper.
 \end{abstract}
 \textbf{Keywords:} Imaging, Image Processing, Machine Vision, etc. (Maximum five)
 
@@ -114,23 +114,23 @@ A description of the seventeen different columns available in the dataset is sho
 	\centering
 	\begin{tabular}{lccccc}\toprule
 		Column Name & opel\_corsa\_01.csv & opel\_corsa\_2.csv & peugeot\_207\_1.csv & peugeot\_207\_2.csv \\ 
-		AltitudeVariation & 0.73 & 0.83 \\ 
-		VehicleSpeedInstantaneous & 0.09 & 0.18 \\ 
-		VehicleSpeedAverage & 4.8 & 5.45 \\ 
-		VehicleSpeedVariance & 4.8 & 5.45 \\ 
-		VehicleSpeedVariation & 0.46 & 0.88 \\ 
-		LongitudinalAcceleration & 0 & 0 \\ 
-		EngineLoad & 0 & 0 \\ 
-		EngineCoolantTemperature & 0 & 0 \\ 
-		ManifoldAbsolutePressure & 0 & 0 \\ 
-		EngineRPM & 0 & 0 \\ 
-		MassAirFlow & 0 & 0 \\ 
-		IntakeAirTemperature & 0 & 0 \\ 
-		VerticalAcceleration & 0 & 0 \\ 
-		FuelConsumptionAverage & 1.31 & 1.2 \\ 
-		roadSurface & 0 & 0 \\ 
-		traffic & 0 & 0 \\ 
-		drivingStyle & 0 & 0 \\ \bottomrule
+		AltitudeVariation & 0.73\% & 0.83\% & 0.73\% & 0.58\% \\ 
+		VehicleSpeedInstantaneous & 0.09\% & 0.18\% & 0.10\% & 0.43\% \\ 
+		VehicleSpeedAverage & 4.79\% & 5.45\% & 4.82\% & 3.83\% \\ 
+		VehicleSpeedVariance & 4.79\% & 5.45\% & 4.82\% & 3.83\% \\ 
+		VehicleSpeedVariation & 0.46\% & 0.88\% & 0.91\% & 0.82\% \\ 
+		LongitudinalAcceleration & 0.00\% & 0.00\% & 0.00\% & 0.00\% \\ 
+		EngineLoad & 0.00\% & 0.00\% & 0.06\% & 0.00\% \\ 
+		EngineCoolantTemperature & 0.00\% & 0.00\% & 0.06\% & 0.00\% \\ 
+		ManifoldAbsolutePressure & 0.00\% & 0.00\% & 0.06\% & 0.00\% \\ 
+		EngineRPM & 0.00\% & 0.00\% & 0.06\% & 0.00\% \\ 
+		MassAirFlow & 0.00\% & 0.00\% & 0.06\% & 0.00\% \\ 
+		IntakeAirTemperature & 0.00\% & 0.00\% & 0.06\% & 0.00\% \\ 
+		VerticalAcceleration & 0.00\% & 0.00\% & 0.00\% & 0.00\% \\ 
+		FuelConsumptionAverage & 1.31\% & 1.20\% & 1.11\% & 0.89\% \\ 
+		roadSurface & 0.00\% & 0.00\% & 0.00\% & 0.00\% \\ 
+		traffic & 0.00\% & 0.00\% & 0.00\% & 0.00\% \\ 
+		drivingStyle & 0.00\% & 0.00\% & 0.00\% & 0.00\% \\ \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -140,9 +140,24 @@ Due to large variations in the value and units of measurement across the numeric
 	X_{j \text{ scaled}} = \frac{X_{j}-\text{min}(X_{j})}{\text{max}(X_{j})-\text{min}(X_{j})}
 \end{equation}
 
+\subsection{Classification Models}
+
+\subsubsection{Random Forest Classifier}
+
+A random forest classifier works on the basis of decision trees and is essentially an ensemblement of decision tree classifiers. A random forest algorithm works drawing bootstrapped samples from the original dataset and fitting a decision tree using a random sample of the predictors. In order to predict using new data, an aggregate prediction is calculated from $n_{tree}$, the number of trees. A majority concensus is what's used to determine the predicted classification label.
+
+\subsubsection{K Neighbours Classifier}
+
+The K-Nearest Neighbours algorithm differs from the Random Forest Classifier in that instead of inferring a model from the data, the data is used directly. The K-Nearest Neighbours algorithm essentially works as follows (for a hyper-parameter $k$):
+
+\begin{itemize}
+	\item Retrieve the $k$ most observations
+	\item Take the mode of $k$ votes to determine which class the observation belongs to
+\end{itemize}
+
 \subsection{Model Metrics}
 
-The $F_{1}$ score was used to assess the accuracy of the model. The $F_{1}$ score is defined as the harmonic mean of the precision and recall. Precision is defined as:
+The $F_{1}$ score was used to assess the accuracy of the model. The reason why the $F_{1}$ score has been chosen as a model metric here is due to imbalanced classes being observed in the dependent variables, meaning that the number of false positives and false negatives is crucial to consider when comparing models. The $F_{1}$ score is defined as the harmonic mean of the precision and recall. Precision is defined as:
 
 \begin{equation}
 	\text{Precision} = \frac{ \text{Number of true positives} }{\text{Number of true positives} + \text{Number of false positives}}
@@ -159,6 +174,14 @@ Then, the $F_{1}$ score is defined as:
 \begin{equation}
 	F_{1} = 2 \times \frac{\text{precision} \times \text{recall}}{\text{precision} + \text{recall}}
 \end{equation}
+
+Since the $F_{1}$ score is calculated on a per-class basis and there are multiple classes in two of the dependent variables, an average $F_{1}$ score was calculated to in order to assess model accuracy.
+
+\section{Results}
+
+\subsection{Random Forest Classifier}
+
+\subsection{K Neighbours Classifier}
 
 \section*{Acknowledgments}
 
